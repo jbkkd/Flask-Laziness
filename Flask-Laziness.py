@@ -1,26 +1,26 @@
 class_name = raw_input("Enter class name:")
 input_data = raw_input("Enter class vals:")
-splitted = input_data.split()
+class_variables = input_data.split()
 
 # class definition
 print "class " + class_name + "(db.Model):"
 print '    """\n    This model \n    """\n'
 print "    id = db.Column(db.Integer(), primary_key=True)"
 print "    _date = db.Column(\"date\", db.DateTime())"
-for i in splitted:
+for i in class_variables:
     print "    _" + i + " = db.Colomun(\"" + i + "\", db)"
-print "    _admin_note = db.Column(\"admin_notes\", db.Text())"
+print "    _admin_notes = db.Column(\"admin_notes\", db.Text())"
 
 
 
 # init definition
 print ""
 print "    def __init__(self, date,",
-for i in splitted:
+for i in class_variables:
     print i + ",",
 print "admin_notes):"
 print "         self.date = date"
-for i in splitted:
+for i in class_variables:
     print "        self." + i + " = " + i
 print "        self.admin_notes = admin_notes"
 
@@ -39,7 +39,7 @@ print """    @hybrid_property
     def date(self, value):
         self._date = value\n"""
 
-for i in splitted:
+for i in class_variables:
     print """    @hybrid_property
     def %s(self):
         return self._%s
